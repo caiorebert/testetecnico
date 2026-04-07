@@ -69,8 +69,11 @@ export default function Home() {
       });
   }
 
-  const formataMoeda = (valor: number) => {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  const formataMoeda = (valor: any) => {
+    if (typeof valor === 'number') {
+      return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+    return 'R$ 0,00';
   }
 
   useEffect(() => {
@@ -166,18 +169,18 @@ export default function Home() {
                         <span className="text-gray-800 font-medium">{pessoa.nome}</span>
                       </div>
                     </td>
-                    <td className="border-b border-gray-100 px-4 py-3 text-green-600 font-semibold">R$ {pessoa.totalReceitas.toFixed(2)}</td>
-                    <td className="border-b border-gray-100 px-4 py-3 text-red-600 font-semibold">R$ {pessoa.totalDespesas.toFixed(2)}</td>
-                    <td className="border-b border-gray-100 px-4 py-3 text-gray-800 font-bold">R$ {pessoa.saldo.toFixed(2)}</td>
+                    <td className="border-b border-gray-100 px-4 py-3 text-green-600 font-semibold">{formataMoeda(pessoa.totalReceitas)}</td>
+                    <td className="border-b border-gray-100 px-4 py-3 text-red-600 font-semibold">{formataMoeda(pessoa.totalDespesas)}</td>
+                    <td className="border-b border-gray-100 px-4 py-3 text-gray-800 font-bold">{formataMoeda(pessoa.saldo)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <h6 className="text-gray-800 font-bold mt-5">Totais Gerais:</h6>
             <div className="flex items-center justify-center gap-6 mt-6">
-              <p className="text-gray-500 mt-2">Saldo Líquido Geral: R$ {dashboardData?.saldoLiquidoGeralPessoas.toFixed(2)}</p>
-              <p className="text-gray-500 mt-2">Total Geral Receitas: R$ {dashboardData?.totalGeralReceitasPessoas.toFixed(2)}</p>
-              <p className="text-gray-500 mt-2">Total Geral Despesas: R$ {dashboardData?.totalGeralDespesasPessoas.toFixed(2)}</p>
+              <p className="text-gray-500 mt-2">Saldo Líquido Geral: {formataMoeda(dashboardData?.saldoLiquidoGeralPessoas)}</p>
+              <p className="text-gray-500 mt-2">Total Geral Receitas: {formataMoeda(dashboardData?.totalGeralReceitasPessoas)}</p>
+              <p className="text-gray-500 mt-2">Total Geral Despesas: {formataMoeda(dashboardData?.totalGeralDespesasPessoas)}</p>
             </div>
           </div>
 
@@ -217,9 +220,9 @@ export default function Home() {
             </table>
             <h6 className="text-gray-800 font-bold mt-5">Totais Gerais:</h6>
             <div className="flex items-center justify-center gap-6 mt-6">
-              <p className="text-gray-500 mt-2">Saldo Líquido Geral: R$ {dashboardData?.saldoLiquidoGeralCategorias.toFixed(2)}</p>
-              <p className="text-gray-500 mt-2">Total Geral Receitas: R$ {dashboardData?.totalGeralReceitasCategorias.toFixed(2)}</p>
-              <p className="text-gray-500 mt-2">Total Geral Despesas: R$ {dashboardData?.totalGeralDespesasCategorias.toFixed(2)}</p>
+              <p className="text-gray-500 mt-2">Saldo Líquido Geral: {formataMoeda(dashboardData?.saldoLiquidoGeralCategorias)}</p>
+              <p className="text-gray-500 mt-2">Total Geral Receitas: {formataMoeda(dashboardData?.totalGeralReceitasCategorias)}</p>
+              <p className="text-gray-500 mt-2">Total Geral Despesas: {formataMoeda(dashboardData?.totalGeralDespesasCategorias)}</p>
             </div>
           </div>
         </div>
