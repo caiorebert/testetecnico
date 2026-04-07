@@ -9,6 +9,10 @@ public class Pessoa
     public int Idade { get; set; }
     public DateTime CriadoEm { get; set; } = DateTime.Now;
 
+    public Pessoa()
+    {
+        
+    }
     public Pessoa(int Id, string Nome, int Idade)
     {
         this.Id = Id;

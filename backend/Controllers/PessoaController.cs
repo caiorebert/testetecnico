@@ -8,11 +8,6 @@ using TesteTecnico.Services;
 public class PessoaController : ControllerBase
 {
     protected readonly PessoaService _pessoaService;
-    private static List<Pessoa> Pessoas = [
-        new Pessoa(1, "Caio", 12),
-        new Pessoa(2, "Caio2", 13),
-        new Pessoa(3, "Caio3", 1),
-    ];
 
     public PessoaController(PessoaService pessoaService)
     {
@@ -54,11 +49,10 @@ public class PessoaController : ControllerBase
             return BadRequest("Nome é obrigatório");
         }
 
-        Pessoa novaPessoa = new(Pessoas.Count + 1, pessoaDTO.Nome, pessoaDTO.Idade);
 
-        await _pessoaService.AddAsync(novaPessoa);
+        Pessoa novaPessoa = await _pessoaService.AddAsync(pessoaDTO);
 
-        return Ok(Pessoas);
+        return Ok(novaPessoa);
     }
 
     [HttpPut("{id}")]

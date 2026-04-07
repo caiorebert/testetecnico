@@ -22,9 +22,17 @@ public class PessoaService
         return await _pessoaRepository.GetByIdAsync(id);
     }
 
-    public async Task AddAsync(Pessoa pessoa)
+    public async Task<Pessoa> AddAsync(PessoaDTO pessoaDTO)
     {
+        Pessoa pessoa = new Pessoa
+        {
+            Nome = pessoaDTO.Nome,
+            Idade = pessoaDTO.Idade
+        };
+
         await _pessoaRepository.AddAsync(pessoa);
+        
+        return pessoa;
     }
 
     public async Task<Pessoa> UpdateAsync(int id, PessoaDTO pessoa)
