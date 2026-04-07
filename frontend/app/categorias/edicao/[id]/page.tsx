@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Form from '../../components/Form'; 
 import { ArrowLeft, Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface CategoriaForm {
   descricao: string,
@@ -22,11 +23,12 @@ export default function EdicaoCategoria() {
     const fetchCategoria = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categoria/${params.id}`);
-        if (!response.ok) throw new Error('Categoria não encontrada');
+        if (!response.ok) toast.error('Erro ao carregar categoria do servidor.');
         const data = await response.json();
         setCategoria(data);
       } catch (err) {
         setError('Erro ao carregar dados da categoria.');
+        toast.error('Erro ao carregar dados da categoria.');
       } finally {
         setLoading(false);
       }
@@ -44,14 +46,14 @@ export default function EdicaoCategoria() {
       });
 
       if (response.ok) {
-        alert('Atualizado com sucesso!');
+        toast.success('Categoria atualizada com sucesso!');
         router.push('/categorias');
       } else {
-        alert('Erro ao atualizar no servidor.');
+        toast.error('Erro ao atualizar categoria no servidor.');
       }
     } catch (err) {
       console.error(err);
-      alert('Erro de conexão.');
+      toast.error('Erro de conexão.');
     }
   };
 

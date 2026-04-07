@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import Form from '../components/Form';
 import { ArrowLeft } from 'lucide-react';
+import { toast } from 'sonner';
 
 export default function Cadastro() {
   const router = useRouter();
@@ -12,10 +13,10 @@ export default function Cadastro() {
       body: JSON.stringify(data),
     });
     if (response.ok) {
-        alert('Criado com sucesso!');
+        toast.success('Transação criada com sucesso!');
         router.push('/transacoes');
       } else {
-        alert('Erro ao criar no servidor.');
+        toast.error('Erro ao criar transação no servidor.');
       }
   };
 

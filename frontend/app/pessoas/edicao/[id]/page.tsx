@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Form from '../../components/Form'; 
 import { ArrowLeft, Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface PessoaForm {
   nome: string,
@@ -27,6 +28,7 @@ export default function EdicaoPessoa() {
         setPessoa(data);
       } catch (err) {
         setError('Erro ao carregar dados da pessoa.');
+        toast.error('Erro ao carregar dados da pessoa.');
       } finally {
         setLoading(false);
       }
@@ -44,14 +46,14 @@ export default function EdicaoPessoa() {
       });
 
       if (response.ok) {
-        alert('Atualizado com sucesso!');
+        toast.success('Pessoa atualizada com sucesso!');
         router.push('/pessoas');
       } else {
-        alert('Erro ao atualizar no servidor.');
+        toast.error('Erro ao atualizar pessoa no servidor.');
       }
     } catch (err) {
       console.error(err);
-      alert('Erro de conexão.');
+      toast.error('Erro de conexão.');
     }
   };
 

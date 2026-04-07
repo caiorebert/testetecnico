@@ -2,6 +2,7 @@
 import { ArrowLeft } from 'lucide-react';
 import Form from '../components/Form';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function Cadastro() {
   const router = useRouter();
@@ -14,10 +15,10 @@ export default function Cadastro() {
     });
 
     if (response.ok) {
-        alert('Criado com sucesso!');
+        toast.success('Pessoa criada com sucesso!');
         router.push('/pessoas');
       } else {
-        alert('Erro ao criar no servidor.');
+        toast.error('Erro ao criar pessoa no servidor.');
       }
   };
 
