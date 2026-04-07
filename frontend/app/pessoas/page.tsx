@@ -27,7 +27,7 @@ const ListaPessoas = () => {
     
     setIsDeleting(true);
     try {
-      const response = await fetch(`http://localhost:5045/api/pessoa/${deletingId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pessoa/${deletingId}`, {
         method: 'DELETE',
       });
 
@@ -49,7 +49,7 @@ const ListaPessoas = () => {
   useEffect(() => {
     const fetchPessoas = async () => {
       try {
-        const response = await fetch('http://localhost:5045/api/pessoa');
+        const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/pessoa');
         const data = (await response.json());
         setPessoas(data)
         setLoading(false)

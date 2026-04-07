@@ -31,7 +31,7 @@ export default function ListaTransacoes() {
 
 
     useEffect(() => {
-        fetch('http://localhost:5045/api/transacao').then(res => res.json()).then(setTransacoes);
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/transacao').then(res => res.json()).then(setTransacoes);
     }, []);
 
     const openDeleteModal = (id: number) => {
@@ -40,7 +40,7 @@ export default function ListaTransacoes() {
     };
 
     const handleDelete = async () => {
-        await fetch(`http://localhost:5045/api/transacao/${deletingId}`, { method: 'DELETE' });
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transacao/${deletingId}`, { method: 'DELETE' });
         setTransacoes(transacoes.filter((t: Transacao) => t.id !== deletingId));
         setIsModalOpen(false);
     };

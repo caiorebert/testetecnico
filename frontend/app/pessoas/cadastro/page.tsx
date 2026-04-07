@@ -7,7 +7,7 @@ export default function Cadastro() {
   const router = useRouter();
   
   const handleCreate = async (data: any) => {
-    const response = await fetch('http://localhost:5045/api/pessoa', {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/pessoa', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),

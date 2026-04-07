@@ -64,7 +64,7 @@ export default function Home() {
   ];
 
   const consultaDashboard = () => {
-      fetch('http://localhost:5045/api/dashboard').then(res => res.json()).then(data => {
+      fetch(process.env.NEXT_PUBLIC_API_URL + '/dashboard').then(res => res.json()).then(data => {
         setDashboardData(data);
       });
   }

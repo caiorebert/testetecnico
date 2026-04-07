@@ -6,7 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 export default function Cadastro() {
   const router = useRouter();
   const handleCreate = async (data: any) => {
-    const response = await fetch('http://localhost:5045/api/transacao', {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/transacao', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),

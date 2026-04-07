@@ -20,7 +20,7 @@ export default function ListaCategorias() {
     const [selectedId, setSelectedId] = useState<number | null>(null);
 
     useEffect(() => {
-        fetch('http://localhost:5045/api/categoria').then(res => res.json()).then(setCategorias);
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/categoria').then(res => res.json()).then(setCategorias);
     }, []);
 
     const confirmDelete = (id: number) => {
@@ -29,7 +29,7 @@ export default function ListaCategorias() {
     };
 
     const handleDelete = async () => {
-        await fetch(`http://localhost:5045/api/categoria/${selectedId}`, { method: 'DELETE' });
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categoria/${selectedId}`, { method: 'DELETE' });
         setCategorias(categorias.filter((t: any) => t.id !== selectedId));
         setIsModalOpen(false);
     };

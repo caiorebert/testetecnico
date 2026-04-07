@@ -25,7 +25,7 @@ export default function EdicaoTransacao() {
   useEffect(() => {
     const fetchTransacao = async () => {
       try {
-        const response = await fetch(`http://localhost:5045/api/transacao/${params.id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transacao/${params.id}`);
         if (!response.ok) throw new Error('Transação não encontrada');
         const data = await response.json();
         setTransacao(data);
@@ -41,7 +41,7 @@ export default function EdicaoTransacao() {
 
   const handleUpdate = async (formData: TransacaoForm) => {
     try {
-      const response = await fetch(`http://localhost:5045/api/transacao/${params.id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transacao/${params.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

@@ -21,7 +21,7 @@ export default function EdicaoPessoa() {
   useEffect(() => {
     const fetchPessoa = async () => {
       try {
-        const response = await fetch(`http://localhost:5045/api/pessoa/${params.id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pessoa/${params.id}`);
         if (!response.ok) throw new Error('Pessoa não encontrada');
         const data = await response.json();
         setPessoa(data);
@@ -37,7 +37,7 @@ export default function EdicaoPessoa() {
 
   const handleUpdate = async (formData: any) => {
     try {
-      const response = await fetch(`http://localhost:5045/api/pessoa/${params.id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pessoa/${params.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

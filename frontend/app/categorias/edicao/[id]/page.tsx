@@ -21,7 +21,7 @@ export default function EdicaoCategoria() {
   useEffect(() => {
     const fetchCategoria = async () => {
       try {
-        const response = await fetch(`http://localhost:5045/api/categoria/${params.id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categoria/${params.id}`);
         if (!response.ok) throw new Error('Categoria não encontrada');
         const data = await response.json();
         setCategoria(data);
@@ -37,7 +37,7 @@ export default function EdicaoCategoria() {
 
   const handleUpdate = async (formData: any) => {
     try {
-      const response = await fetch(`http://localhost:5045/api/categoria/${params.id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categoria/${params.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

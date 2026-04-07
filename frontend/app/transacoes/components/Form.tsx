@@ -47,10 +47,10 @@ export default function TransacaoForm({ initialData, onSubmit, buttonText, title
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:5045/api/pessoa').then(res => res.json()).then(setPessoas);
+    fetch(process.env.NEXT_PUBLIC_API_URL + '/pessoa').then(res => res.json()).then(setPessoas);
     if (initialData) setFormData(initialData);
 
-    fetch('http://localhost:5045/api/categoria').then(res => res.json()).then(data => {
+    fetch(process.env.NEXT_PUBLIC_API_URL + '/categoria').then(res => res.json()).then(data => {
       // @ts-ignore
       setCategorias(data.filter(c => c.finalidade === 1 || c.finalidade === 3));
       setCategoriasBackup(data);
